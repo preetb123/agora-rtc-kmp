@@ -1,0 +1,15 @@
+CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
+CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/shared
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../../shared/build/cocoapods/framework" "${PODS_ROOT}/AgoraRtcEngine_iOS" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/AIAEC" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/AINS" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/AudioBeauty" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/ClearVision" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/ContentInspect" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/DRM" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/FaceDetection" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/ReplayKit" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/RtcBasic" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/SpatialAudio" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/VQA" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/VideoCodecDec" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/VideoCodecEnc" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraRtcEngine_iOS/VirtualBackground"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+KOTLIN_PROJECT_PATH = :shared
+OTHER_LDFLAGS = $(inherited) -l"c++" -framework "AgoraAiEchoCancellationExtension" -framework "AgoraAiNoiseSuppressionExtension" -framework "AgoraAudioBeautyExtension" -framework "AgoraClearVisionExtension" -framework "AgoraContentInspectExtension" -framework "AgoraCore" -framework "AgoraDrmLoaderExtension" -framework "AgoraFaceDetectionExtension" -framework "AgoraReplayKitExtension" -framework "AgoraRtcKit" -framework "AgoraSoundTouch" -framework "AgoraSpatialAudioExtension" -framework "AgoraVideoDecoderExtension" -framework "AgoraVideoEncoderExtension" -framework "AgoraVideoQualityAnalyzerExtension" -framework "AgoraVideoSegmentationExtension" -framework "Agorafdkaac" -framework "Agoraffmpeg" -framework "video_dec" -framework "video_enc" -weak_framework "AgoraAiEchoCancellationExtension" -weak_framework "AgoraAiNoiseSuppressionExtension" -weak_framework "AgoraAudioBeautyExtension" -weak_framework "AgoraClearVisionExtension" -weak_framework "AgoraContentInspectExtension" -weak_framework "AgoraDrmLoaderExtension" -weak_framework "AgoraFaceDetectionExtension" -weak_framework "AgoraReplayKitExtension" -weak_framework "AgoraSpatialAudioExtension" -weak_framework "AgoraVideoDecoderExtension" -weak_framework "AgoraVideoEncoderExtension" -weak_framework "AgoraVideoQualityAnalyzerExtension" -weak_framework "AgoraVideoSegmentationExtension"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}
+PODS_TARGET_SRCROOT = ${PODS_ROOT}/../../shared
+PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
+PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
+PRODUCT_MODULE_NAME = shared
+SKIP_INSTALL = YES
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
