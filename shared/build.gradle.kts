@@ -36,12 +36,14 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             //put your multiplatform dependencies here
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
         androidMain.dependencies {
             implementation("io.agora.rtc:voice-sdk:4.2.6")
+            implementation("androidx.startup:startup-runtime:1.2.0-alpha02")
         }
         all {
             languageSettings {
