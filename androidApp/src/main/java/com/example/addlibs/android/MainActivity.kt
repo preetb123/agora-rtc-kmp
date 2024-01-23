@@ -35,108 +35,108 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.addlibs.AgoraRTCClient
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MyApplicationTheme {
-                LoginPage()
-            }
-        }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContent {
+      MyApplicationTheme {
+        LoginPage()
+      }
     }
+  }
 }
 
 @Composable
 fun LoginPage() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
+  Column(
+    modifier = Modifier
+        .fillMaxSize()
 
-            .verticalScroll(state = rememberScrollState())
-            .background(Color.White),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Text(text = "Agora Voice call", fontWeight = FontWeight.Bold, fontSize = 24.sp)
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Compose multiplatform", fontSize = 18.sp)
-        Spacer(modifier = Modifier.height(50.dp))
-        InputFields()
-    }
+        .verticalScroll(state = rememberScrollState())
+        .background(Color.White),
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally,
+  ) {
+    Text(text = "Agora Voice call", fontWeight = FontWeight.Bold, fontSize = 24.sp)
+    Spacer(modifier = Modifier.height(16.dp))
+    Text(text = "Compose multiplatform", fontSize = 18.sp)
+    Spacer(modifier = Modifier.height(50.dp))
+    InputFields()
+  }
 }
 
 @Composable
 private fun InputFields(
-    model: MainViewModel = viewModel<MainViewModel>()
+  model: MainViewModel = viewModel<MainViewModel>()
 ) {
-    val lifecycleOwner = LocalLifecycleOwner.current
-    val channelNameState = remember { mutableStateOf(TextFieldValue()) }
+  val lifecycleOwner = LocalLifecycleOwner.current
+  val channelNameState = remember { mutableStateOf(TextFieldValue()) }
 
-    val context = LocalContext.current
-    LaunchedEffect(key1 = context) {
-        model.someLiveData.observe(lifecycleOwner) {
-            Toast
-                .makeText(context, it, Toast.LENGTH_SHORT)
-                .show()
-        }
+  val context = LocalContext.current
+  LaunchedEffect(key1 = context) {
+    model.someLiveData.observe(lifecycleOwner) {
+      Toast
+        .makeText(context, it, Toast.LENGTH_SHORT)
+        .show()
     }
+  }
 
-    Column(
-        modifier = Modifier.padding(horizontal = 20.dp),
-        verticalArrangement = Arrangement.Center,
-    ) {
-        TextField(
-            value = channelNameState.value,
-            onValueChange = { channelNameState.value = it },
-            label = { Text("Channel Name ") },
-            placeholder = { Text("Enter channel name") },
-            modifier = Modifier
-                .align(
-                    alignment = Alignment.CenterHorizontally
-                )
-                .fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(16.dp))
+  Column(
+    modifier = Modifier.padding(horizontal = 20.dp),
+    verticalArrangement = Arrangement.Center,
+  ) {
+    TextField(
+      value = channelNameState.value,
+      onValueChange = { channelNameState.value = it },
+      label = { Text("Channel Name ") },
+      placeholder = { Text("Enter channel name") },
+      modifier = Modifier
+          .align(
+              alignment = Alignment.CenterHorizontally
+          )
+          .fillMaxWidth()
+    )
+    Spacer(modifier = Modifier.height(16.dp))
 
-    }
+  }
 
-    Spacer(modifier = Modifier.height(60.dp))
+  Spacer(modifier = Modifier.height(60.dp))
 
-    Button(
-        onClick = {
-            model.joinCall(channelNameState.value.text)
-        },
-        contentPadding = PaddingValues(
-            horizontal = 20.dp,
-            vertical = 10.dp
-        )
-    ) {
-        Text(text = "Join", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-    }
+  Button(
+    onClick = {
+      model.joinCall(channelNameState.value.text)
+    },
+    contentPadding = PaddingValues(
+      horizontal = 20.dp,
+      vertical = 10.dp
+    )
+  ) {
+    Text(text = "Join", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+  }
 
-    Spacer(modifier = Modifier.height(100.dp))
+  Spacer(modifier = Modifier.height(100.dp))
 
-    Button(
-        onClick = {
-            model.endCall()
-        },
-        contentPadding = PaddingValues(
-            horizontal = 20.dp,
-            vertical = 10.dp
-        )
-    ) {
-        Text(text = "End Call", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-    }
+  Button(
+    onClick = {
+      model.endCall()
+    },
+    contentPadding = PaddingValues(
+      horizontal = 20.dp,
+      vertical = 10.dp
+    )
+  ) {
+    Text(text = "End Call", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+  }
 }
 
 @Composable
 fun GreetingView(text: String) {
-    Text(text = text)
+  Text(text = text)
 }
 
 @Preview
 @Composable
 fun DefaultPreview() {
-    MyApplicationTheme {
-        LoginPage()
-    }
+  MyApplicationTheme {
+    LoginPage()
+  }
 }
