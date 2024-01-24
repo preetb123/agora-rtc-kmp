@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.startup.Initializer
 
-internal object AppContext {
+object AppContext {
   private lateinit var application: Application
 
   fun setup(context: Context) {

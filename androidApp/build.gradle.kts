@@ -46,4 +46,5 @@ dependencies {
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
   debugImplementation(libs.compose.ui.tooling)
+  implementation(project(":ui"))
 }

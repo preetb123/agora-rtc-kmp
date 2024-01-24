@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "AddLibs"
 include(":androidApp")
 include(":shared")
+include(":ui")

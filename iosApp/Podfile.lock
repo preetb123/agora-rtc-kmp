@@ -30,9 +30,11 @@ PODS:
   - AgoraRtcEngine_iOS/VQA (4.2.6)
   - shared (1.0):
     - AgoraRtcEngine_iOS (= 4.2.6)
+  - ui (1.0)
 
 DEPENDENCIES:
   - shared (from `../shared`)
+  - ui (from `../ui`)
 
 SPEC REPOS:
   trunk:
@@ -41,11 +43,14 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   shared:
     :path: "../shared"
+  ui:
+    :path: "../ui"
 
 SPEC CHECKSUMS:
   AgoraRtcEngine_iOS: ac647332ad8f86d79cf810601c9e62b28c3a4de0
   shared: 28f1a21c2430a4cf550a0c9304065304e757b7d7
+  ui: ea294af0e4ef18cceec85e0ad041c147ff9a78e1
 
-PODFILE CHECKSUM: 78d6cc1b71b232202c48a29d4e6c34972c534c73
+PODFILE CHECKSUM: 3d0c5dd5c5a421471b4117e8aada72eed5db3e89
 
 COCOAPODS: 1.11.3

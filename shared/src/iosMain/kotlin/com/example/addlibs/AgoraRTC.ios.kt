@@ -1,5 +1,6 @@
 package com.example.addlibs
 
+import co.touchlab.kermit.Logger
 import cocoapods.AgoraRtcEngine_iOS.AgoraChannelStats
 import cocoapods.AgoraRtcEngine_iOS.AgoraRtcChannelMediaOptions
 import cocoapods.AgoraRtcEngine_iOS.AgoraRtcEngineDelegateProtocol
@@ -18,35 +19,35 @@ class AgoraRtcIOS : AgoraRTC {
   override fun initialize(appId: String): Flow<RTCEngineEvent> = callbackFlow {
     val delegate: AgoraRtcEngineDelegateProtocol =
       object : AgoraRtcEngineDelegateProtocol, NSObject() {
-        override fun rtcEngine(
-          engine: AgoraRtcEngineKit,
-          didJoinChannel: String,
-          withUid: NSUInteger,
-          elapsed: NSInteger
-        ) {
-          joinChannelFlow.tryEmit(
-            JoinChannelListenerEvent.OnJoinSuccess(
-              didJoinChannel,
-              withUid.toInt(),
-              elapsed.toInt()
-            )
-          )
-        }
-
-        override fun rtcEngine(
-          engine: AgoraRtcEngineKit,
-          didLeaveChannelWithStats: AgoraChannelStats
-        ) {
-          leaveChannelFlow.tryEmit(
-            LeaveChannelListenerEvent.OnLeaveChannelSuccess(
-              CallStats(
-                didLeaveChannelWithStats.duration.toInt()
-              )
-            )
-          )
-        }
+//        override fun rtcEngine(
+//          engine: AgoraRtcEngineKit,
+//          didJoinChannel: String,
+//          withUid: NSUInteger,
+//          elapsed: NSInteger
+//        ) {
+//          joinChannelFlow.tryEmit(
+//            JoinChannelListenerEvent.OnJoinSuccess(
+//              didJoinChannel,
+//              withUid.toInt(),
+//              elapsed.toInt()
+//            )
+//          )
+//        }
+//
+//        override fun rtcEngine(
+//          engine: AgoraRtcEngineKit,
+//          didLeaveChannelWithStats: AgoraChannelStats
+//        ) {
+//          leaveChannelFlow.tryEmit(
+//            LeaveChannelListenerEvent.OnLeaveChannelSuccess(
+//              CallStats(
+//                didLeaveChannelWithStats.duration.toInt()
+//              )
+//            )
+//          )
+//        }
       }
-    rtcEngineKit = AgoraRtcEngineKit.sharedEngineWithAppId(appId, delegate)
+    rtcEngineKit = AgoraRtcEngineKit.sharedEngineWithAppId(appId, delegate = null)
 
     awaitClose { }
   }
@@ -61,7 +62,20 @@ class AgoraRtcIOS : AgoraRTC {
   ): Flow<JoinChannelListenerEvent> {
     joinChannelFlow = MutableStateFlow(JoinChannelListenerEvent.OnJoinChannelCalled)
     val options = AgoraRtcChannelMediaOptions()
-    val res = rtcEngineKit.joinChannelByToken(token, channelId, "", null)
+
+
+    val res = rtcEngineKit.joinChannelByToken(token, channelId, "1", options) { s: String?, uLong: NSUInteger, l: NSInteger ->
+      //run {
+        joinChannelFlow.tryEmit(
+          JoinChannelListenerEvent.OnJoinSuccess(
+            s,
+            uLong.toInt(),
+            l.toInt()
+          )
+        )
+      //}
+    }
+
     if (res < 0) {
       joinChannelFlow.tryEmit(JoinChannelListenerEvent.OnJoinChannelError(res, ""))
     }
@@ -71,6 +85,16 @@ class AgoraRtcIOS : AgoraRTC {
   override fun leaveChannel(): Flow<LeaveChannelListenerEvent> {
     leaveChannelFlow = MutableStateFlow(LeaveChannelListenerEvent.OnLeaveChannelInitiated)
     val res = rtcEngineKit.leaveChannel(null)
+    rtcEngineKit.leaveChannel {
+      Logger.i("call ended ${it?.duration()}")
+      leaveChannelFlow.tryEmit(
+            LeaveChannelListenerEvent.OnLeaveChannelSuccess(
+              CallStats(
+                it?.duration?.toInt()!!
+              )
+            )
+          )
+    }
     if (res < 0) {
       leaveChannelFlow.tryEmit(LeaveChannelListenerEvent.OnLeaveChannelError(res, ""))
     }

@@ -37,6 +37,7 @@ kotlin {
     commonMain.dependencies {
       //put your multiplatform dependencies here
       implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+      implementation("co.touchlab:kermit:1.0.0")
     }
     commonTest.dependencies {
       implementation(libs.kotlin.test)
